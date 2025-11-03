@@ -1,15 +1,7 @@
-import { Text, View } from "react-native";
+import SessionScreen from "@/components/screens/SessionScreen";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Home Screen</Text>
-    </View>
+    <SessionScreen />
   );
 }
