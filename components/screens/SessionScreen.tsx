@@ -1,6 +1,8 @@
+import { useUser } from "@clerk/clerk-expo";
 import { useConversation } from "@elevenlabs/react-native";
 import { Button, Text, View } from "react-native";
 export default function SessionScreen() {
+    const { user } = useUser();
     const conversation = useConversation({
             onConnect: () => console.log('Connected to conversation'),
             onDisconnect: () => console.log('Disconnected from conversation'),
@@ -19,8 +21,8 @@ export default function SessionScreen() {
             await conversation.startSession({
                 agentId: process.env.EXPO_PUBLIC_AGENT_ID,
                 dynamicVariables: {
-                    "user_name": "Daro",
-                    "session_title": "Test Session",
+                    "user_name": user?.username ?? "user",
+                    "session_tittle": "Test Session",
                     "session_description": "This is a test session",
                 },
             });

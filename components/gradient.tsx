@@ -1,4 +1,4 @@
-import { Blur, Canvas, GradientProps, RadialGradient, Rect, vec } from "@shopify/react-native-skia";
+import { Blur, Canvas, RadialGradient, Rect, vec } from "@shopify/react-native-skia";
 import { useEffect } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import { useDerivedValue, useSharedValue, withRepeat, withSpring, withTiming } from "react-native-reanimated";
