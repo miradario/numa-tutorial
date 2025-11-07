@@ -6,7 +6,7 @@ import { Button, Text, View } from "react-native";
 import { Gradient } from "../gradient";
 export default function SessionScreen() {
     const { user } = useUser();
-    console.log ('user info:', user);
+    
     const { sessionId } = useLocalSearchParams()
     const session = sessions.find(s => s.id.toString() === sessionId) ?? sessions[0];
 
@@ -30,10 +30,12 @@ export default function SessionScreen() {
                 dynamicVariables: {
                     "user_name": user?.firstName ?? "Daro",
                     "session_tittle": session.title,
-                    "session_description": session.description,
+                    
                 },
             });
+            console.log('Conversation started');
         } catch (error) {
+
             console.error('Error starting conversation:', error);
         }
     }

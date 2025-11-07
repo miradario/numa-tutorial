@@ -19,8 +19,8 @@ const ANIMATION_CONFIG = {
         PULSE: 1000,
     },
     spring: {
-        damping: 20,
-        stiffness: 90,
+        damping: 10,
+        stiffness: 50,
     }
 } as const;
 
@@ -122,6 +122,7 @@ export function Gradient( {position, isSpeaking} : GradientProps) {
     }, [isSpeaking, baseRadiusValue, animatedY, position]);
 
     useEffect(() => {
+        console.log("isSpeaking changed:", isSpeaking);
         if (isSpeaking) {
             radiusScale.value = withRepeat(
                 withTiming(RADIUS_CONFIG.speakingScale, { duration: ANIMATION_CONFIG.duration.PULSE }),
@@ -130,9 +131,9 @@ export function Gradient( {position, isSpeaking} : GradientProps) {
             );
          
         }else {
-            radiusScale.value = withTiming(RADIUS_CONFIG.quietScale, { duration: ANIMATION_CONFIG.duration.QUIET_TRANSITION });
+            radiusScale.value = withTiming(RADIUS_CONFIG.quietScale, { duration: ANIMATION_CONFIG.duration.QUIET_TRANSITION, });
         }
-    }, [isSpeaking]);
+    }, [isSpeaking, radiusScale]);
     
     return (
         <View style={StyleSheet.absoluteFill}>

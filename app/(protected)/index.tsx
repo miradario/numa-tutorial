@@ -8,10 +8,8 @@ export default function Index() {
     <ScrollView contentInsetAdjustmentBehavior="automatic" style={{ padding: 16 }}>
       {sessions.map((session) => (
         <Pressable key={session.id} onPress={() => {
-          router.navigate({
-            pathname: '/(protected)/session',
-            params: { sessionId: session.id.toString() },
-        }) }}
+          router.push({ pathname: "/session", params: { sessionId: session.id.toString() } });
+        }}
         style={{borderWidth:1,  marginBottom: 20, padding: 16, marginVertical:16, backgroundColor: '#f0f0f0', borderRadius: 5 }}>
           <Text>{session.title}</Text>
         </Pressable>
