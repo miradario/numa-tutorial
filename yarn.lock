@@ -1721,10 +1721,10 @@
     debug "4.3.4"
     event-target-shim "6.0.2"
 
-"@livekit/react-native@^2.9.3":
-  version "2.9.3"
-  resolved "https://registry.yarnpkg.com/@livekit/react-native/-/react-native-2.9.3.tgz#77df9cd2972d648e58d4d9b82d365e55380ef22f"
-  integrity sha512-GMTViZwCfupRR4VrbsSC0ytRl7rVXzCbdFVCqlP7qDKm5uumOEWJIM6l24CWYdRuhiZ/geN0sVIgci4/V1yAww==
+"@livekit/react-native@^2.9.4":
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/@livekit/react-native/-/react-native-2.9.4.tgz#814193f72588113e834cb910a701f48fbf7bf907"
+  integrity sha512-00+Ylb3IiJvogHyc9XFV1jZuPAEQ93bORRjMF1ipNhqWwjGxegzVbATa03MiJPUAvv7X6kAwHEHOq+ACupMY2g==
   dependencies:
     "@livekit/components-react" "^2.8.1"
     "@livekit/mutex" "^1.1.1"

@@ -15,7 +15,7 @@
     "@config-plugins/react-native-webrtc": "^13.0.0",
     "@elevenlabs/react-native": "^0.5.2",
     "@expo/vector-icons": "^15.0.2",
-    "@livekit/react-native": "^2.9.3",
+    "@livekit/react-native": "^2.9.4",
     "@livekit/react-native-expo-plugin": "^1.0.1",
     "@livekit/react-native-webrtc": "^137.0.2",
     "@react-navigation/bottom-tabs": "^7.4.0",
