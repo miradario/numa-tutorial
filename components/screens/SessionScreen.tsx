@@ -3,6 +3,7 @@
 import { sessions } from "@/utils/sessions";
 import { useUser } from "@clerk/clerk-expo";
 import { ElevenLabsProvider, useConversation } from "@elevenlabs/react-native";
+import * as Brightness from "expo-brightness";
 import { useLocalSearchParams } from "expo-router";
 import { useMemo, useState } from "react";
 import { Text, View } from "react-native";
@@ -32,8 +33,9 @@ function SessionScreenContent() {
   const [conversationId, setConversationId] = useState<string | null>(null);
 
   const conversation = useConversation({
-    onConnect: () => {
+    onConnect: ({ conversationId }) => {
       console.log("Connected to conversation");
+      setConversationId(conversationId);
     },
     onDisconnect: () => console.log("Disconnected from conversation"),
     onMessage: (message) => console.log("Received message:", message),
@@ -45,6 +47,19 @@ function SessionScreenContent() {
       console.log("Can send feedback changed:", prop.canSendFeedback),
     onUnhandledClientToolCall: (params) =>
       console.log("Unhandled client tool call:", params),
+    clientTools: {
+      handleSetBrightness: async (parameters: unknown) => {
+        const { brightnessValue } = parameters as { brightnessValue: number };
+        console.log(" Setting brightness to:", brightnessValue);
+        const { status } = await Brightness.requestPermissionsAsync();
+        if (status === "granted") {
+          await Brightness.setBrightnessAsync(brightnessValue);
+          return brightnessValue;
+        } else {
+          console.warn("Brightness permission not granted");
+        }
+      },
+    },
   });
 
   const isSpeaking = useMemo(
@@ -53,7 +68,10 @@ function SessionScreenContent() {
   );
 
   const startConversation = async () => {
+    if (isStarting) return;
+
     try {
+      setIsStarting(true);
       await conversation.startSession({
         agentId: process.env.EXPO_PUBLIC_AGENT_ID,
         dynamicVariables: {
@@ -64,6 +82,8 @@ function SessionScreenContent() {
       console.log("Conversation started");
     } catch (error) {
       console.error("Error starting conversation:", error);
+    } finally {
+      setIsStarting(false);
     }
   };
 
@@ -77,6 +97,9 @@ function SessionScreenContent() {
   const status =
     conversation.status === "connected" || conversation.status === "connecting";
   console.log("Conversation status:", status);
+
+  const canStart = conversation.status === "disconnected" && !isStarting;
+  const canEnd = conversation.status === "connected";
 
   return (
     <>
@@ -97,8 +120,12 @@ function SessionScreenContent() {
         <Text style={{ fontSize: 16, fontWeight: "500", opacity: 0.5 }}>
           {session.title}
         </Text>
-        <Button onPress={startConversation}>Start Conversation</Button>
-        <Button onPress={endConversation}>End Conversation</Button>
+        <Button
+          onPress={canStart ? startConversation : endConversation}
+          disabled={!canStart && !canEnd}
+        >
+          {canStart ? "Start Conversation" : "End Conversation"}
+        </Button>
       </View>
     </>
   );
