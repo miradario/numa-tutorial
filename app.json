@@ -10,7 +10,8 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.miradario.numa-tutorial"
+      "bundleIdentifier": "com.miradario.numa-tutorial",
+      "bitcode": false
     },
     "android": {
       "adaptiveIcon": {
@@ -21,10 +22,21 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.miradario.numatutorial"
+      "package": "com.miradario.numatutorial",
+      "permissions": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.CAMERA",
+        "android.permission.INTERNET",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.WAKE_LOCK",
+        "android.permission.BLUETOOTH"
+      ]
     },
     "web": {
-      "output": "static",
+      "output": "server",
+      "bundler": "metro",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -41,18 +53,26 @@
           }
         }
       ],
-       ["@config-plugins/react-native-webrtc", {
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
-      }],
+      [
+        "@config-plugins/react-native-webrtc",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone"
+        }
+      ],
       [
         "@livekit/react-native-expo-plugin"
-         ],
+      ]
     ],
-   
-
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "929e22c0-296c-4978-9ef6-b4b576749d7b"
+      }
+    },
+    "owner": "miradario"
   }
 }

@@ -4,7 +4,7 @@ import { sessions } from "@/utils/sessions";
 import { useUser } from "@clerk/clerk-expo";
 import { ElevenLabsProvider, useConversation } from "@elevenlabs/react-native";
 import * as Brightness from "expo-brightness";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useMemo, useState } from "react";
 import { Text, View } from "react-native";
 import Button from "../Button";
@@ -88,8 +88,17 @@ function SessionScreenContent() {
   };
 
   const endConversation = async () => {
+    console.log("BUTTON PRESSED → endConversation() called");
     try {
+      console.log("Ending conversation...");
       await conversation.endSession();
+
+      setTimeout(() => {
+        router.push({
+          pathname: "/summary",
+          params: { conversationId },
+        });
+      }, 150);
     } catch (error) {
       console.error("Error ending conversation:", error);
     }
