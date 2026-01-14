@@ -23,7 +23,7 @@ export default function SummaryScreen() {
     const response = await fetch(
       `https://gurudev--cw3spafxsb.expo.app/api/conversations?conversationId=${conversationId}`
     );
-
+    console.log("Fetching conversation data...", response);
     if (response) {
       const data: { conversation: ConversationResponse } =
         await response.json();
@@ -55,7 +55,7 @@ export default function SummaryScreen() {
         {conversationId ? (
           <View>
             <Text style={styles.subtitle}>
-              {conversation?.metadata?.cost} tokens
+              {conversation?.metadata?.cost} tokens Work in progress
             </Text>
 
             <Text style={styles.subtitle}>
